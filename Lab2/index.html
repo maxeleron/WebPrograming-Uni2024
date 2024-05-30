@@ -1,71 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='uk'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>the_AWESOME_site</title>
-    <style>
-
-    </style>
     <script>
-        var str, stb;
-        function fun()
-        {
-            str = parseInt(main_form.t_str.value);
-            stb = parseInt(main_form.t_stb.value);
-            var res_str = "<table>\n";
-            for (var i=1;i<=str;i++)
-            {
-                res_str+="<tr>\n";
-                for(var j=1;j<=stb;j++)
-                {
-                    res_str += "<td>";
-                    res_str += "<input type = \"text\" id = \"_" + i + "_" + j + "\" value = \"" + i + "" + j + "\">";
-                    res_str += "<\/td>\n";
+        function createTable() {
+            const str = parseInt(document.getElementById('t_str').value);
+            const stb = parseInt(document.getElementById('t_stb').value);
+            let tableHTML = '<table>\n';
+            for (let i = 1; i <= str; i++) {
+                tableHTML += '<tr>\n';
+                for (let j = 1; j <= stb; j++) {
+                    tableHTML += `<td><input type='text' id='_${i}_${j}' value='${i}${j}'></td>\n`;
                 }
-                res_str+="<\/tr>\n";
+                tableHTML += '</tr>\n';
             }
-            res_str += "<\/table>";
-            main_div.innerHTML = res_str;
+            tableHTML += '</table>';
+            document.getElementById('main_div').innerHTML = tableHTML;
         }
 
-        function fun_build()
-        {
-            var res_str = "";
-            var str_report = "";
-            for (var i=1;i<=str;i++)
-            {
-                var sum = 0;
-                for(var j=1;j<=stb;j++)
-                {
-                res_str = "sum += parseInt(main_form._" + i + "_" + j + ".value);";
-                eval(res_str);
+        function calculateSums() {
+            const str = parseInt(document.getElementById('t_str').value);
+            const stb = parseInt(document.getElementById('t_stb').value);
+            let report = '';
+            for (let i = 1; i <= str; i++) {
+                let sum = 0;
+                for (let j = 1; j <= stb; j++) {
+                    const cellValue = parseInt(document.getElementById(`_${i}_${j}`).value);
+                    sum += cellValue;
                 }
-                str_report += "Сумма " + i + " строки = " + sum + ";\n"
+                report += `Сумма ${i} строки = ${sum};\n`;
             }
-            alert(str_report);
+            alert(report);
         }
-        </script>
-        </head>
-    <body>
-        <form id = "main_form">
+    </script>
+</head>
+<body>
+    <form id='main_form'>
         <table>
-        <tr>
-        <td>Кількість строк</td>
-        <td> <input type="text" id = "t_str" value="5"></td>
-        </tr>
-        <tr>
-        <td> Кількість стовбців</td>
-        <td><input type="text" id = "t_stb" value="5"></td>
-        </tr>
-        <tr>
-        <td> <input type = "button" onClick = "fun();" value = "Побудувати матрицю"><br> <td>
-        </tr>
-        <tr>
-        <td> <input type = "button" onClick = "fun_build();" value = "Розрахувати"> <td>
-        </tr>
+            <tr>
+                <td>Кількість строк</td>
+                <td><input type='text' id='t_str' value='5'/></td>
+            </tr>
+            <tr>
+                <td>Кількість стовбців</td>
+                <td><input type='text' id='t_stb' value='5'/></td>
+            </tr>
+            <tr>
+                <td><input type='button' onclick='createTable();' value='Побудувати матрицю'></td>
+            </tr>
+            <tr>
+                <td><input type='button' onclick='calculateSums();' value='Розрахувати'></td>
+            </tr>
         </table>
-        <div id = "main_div"></div>
-        </form>
-    </body>
+        <div id='main_div'></div>
+    </form>
+</body>
 </html>
