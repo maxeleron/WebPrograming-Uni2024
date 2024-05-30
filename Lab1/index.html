@@ -15,11 +15,31 @@
             background-color: #004080;
             color: white;
             text-align: center;
-            padding: 10px 0;
+            padding: 20px 0;
+            position: relative;
         }
         .header h1 {
             margin: 0;
-            text-shadow: 2px 2px #ff0000;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px #ff0000, 4px 4px #0000ff;
+        }
+        .header h1::before,
+        .header h1::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            font-size: 0.6em;
+        }
+        .header h1::before {
+            content: "the_";
+            left: -55px;
+            text-shadow: 1px 1px #ff0000, 2px 2px #0000ff;
+        }
+        .header h1::after {
+            content: "_site";
+            right: -45px;
+            text-shadow: 1px 1px #ff0000, 2px 2px #0000ff;
         }
         .content {
             display: flex;
@@ -77,7 +97,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>the_AWESOME_site</h1>
+        <h1>AWESOME</h1>
     </div>
     <div class="content">
         <img src="https://via.placeholder.com/200" alt="Image 1">
