@@ -25,14 +25,17 @@
             const str = parseInt(document.getElementById('t_str').value);
             const stb = parseInt(document.getElementById('t_stb').value);
             let report = '';
+            let totalSum = 0;
             for (let i = 1; i <= str; i++) {
                 let sum = 0;
                 for (let j = 1; j <= stb; j++) {
                     const cellValue = parseInt(document.getElementById(`_${i}_${j}`).value);
                     sum += cellValue;
                 }
-                report += `Сумма ${i} строки = ${sum};\n`;
+                totalSum += sum; // зберігаємо значення суми елементів рядка, до суми матриці
+                report += `Сумма ${i} рядка = ${sum};\n`;
             }
+            report += `Сумма елементів матриці = ${totalSum}.`;
             alert(report);
         }
     </script>
