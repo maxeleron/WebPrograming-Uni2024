@@ -93,6 +93,72 @@
             padding: 5px;
             margin: 5px 0;
         }
+
+        .footer h2 {
+            margin-bottom: 20px;
+        }
+
+        .footer nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        .footer nav ul li a {
+            text-decoration: none;
+            color: #000;
+            transition: color 0.3s;
+        }
+
+        .footer nav ul li a:hover {
+            color: #ff6347;
+        }
+
+        .footer p {
+            margin: 20px 0;
+        }
+
+        .footer input[type="email"] {
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .fixed-element {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            border-radius: 50%;
+            transition: width 0.3s, height 0.3s, border-radius 0.3s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .fixed-element::after {
+            content: "JOIN";
+        }
+
+        .fixed-element:hover {
+            width: 200px;
+            height: 50px;
+            border-radius: 25px;
+        }
+
+        .fixed-element:hover::after {
+            content: "JOIN OUR TELEGRAM";
+            padding-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -122,10 +188,18 @@
     </div>
     <div class="footer">
         <h2>VENUS</h2>
-        <p>HOME | PRODUCTS | ABOUT US</p>
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">PRODUCTS</a></li>
+                <li><a href="#">ABOUT US</a></li>
+            </ul>
+        </nav>
         <p>STAY CONNECTED</p>
         <input type="email" placeholder="Enter your email">
         <p>made by Name Lastname 2018</p>
     </div>
+
+    <div class="fixed-element"></div>
 </body>
 </html>
