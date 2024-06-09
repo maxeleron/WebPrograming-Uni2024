@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP валідація</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #result {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>IP перевірка</h1>
+    <form id="ipForm">
+        <label for="ip">Введіть IP адресу:</label>
+        <input type="text" id="ip" name="ip">
+        <button type="submit">Перевірити</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#ipForm').on('submit', function(event) {
+                event.preventDefault();
+                var ip = $('#ip').val();
+
+                // Валідації IP адреси
+                if (!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip)) {
+                    $('#result').html('<p class="error">Не коректний формат IP адреси.</p>');
+                    return;
+                }
+
+                // Отримуємо дані в JSON
+                $.post('json_ip.php', { ip: ip }, function(data) {
+                    var result = '<h2>JSON результат</h2>';
+                    result += '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                    $('#result').html(result);
+                }, 'json')
+                .fail(function() {
+                    $('#result').html('<p class="error">Помилка в отримуванні даних.</p>');
+                });
+
+                // Отримуємо дані в XML
+                $.post('xml_ip.php', { ip: ip }, function(data) {
+                    var result = '<h2>XML результат</h2>';
+                    result += '<pre>' + new XMLSerializer().serializeToString(data) + '</pre>';
+                    $('#result').append(result);
+                }, 'xml')
+                .fail(function() {
+                    $('#result').html('<p class="error">Помилка в отримуванні даних.</p>');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
